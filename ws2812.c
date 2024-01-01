@@ -1,5 +1,7 @@
 #include <stdlib.h>
+#ifdef DEBUG
 #include <stdio.h>
+#endif
 #include "ws2812.h"
 #include "WS2812.pio.h"
 
