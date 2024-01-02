@@ -15,16 +15,16 @@ struct WS2812 {
 
 uint32_t ws2812_urgb_grbu32(uint8_t r, uint8_t g, uint8_t b) {
     return
-            ((uint32_t) (g) << 16) |
-            ((uint32_t) (r) << 8) |
-            (uint32_t) (b);
+            ((uint32_t) (g) << 24) |
+            ((uint32_t) (r) << 16) |
+            ((uint32_t) (b) << 8);
 }
 
 uint32_t ws2812_urgb_rgbu32(uint8_t r, uint8_t g, uint8_t b) {
     return
-            ((uint32_t) (r) << 16) |
-            ((uint32_t) (g) << 8) |
-            (uint32_t) (b);
+            ((uint32_t) (r) << 24) |
+            ((uint32_t) (g) << 16) |
+            ((uint32_t) (b) << 8);
 }
 
 uint32_t ws2812_uwrgb_wrgbu32(uint8_t w, uint8_t r, uint8_t g, uint8_t b) {
@@ -76,7 +76,7 @@ int8_t ws2812_show(struct WS2812* led_strip) {
 #ifdef DEBUG
         printf("putting LED %d data: %ld\n", i, led_strip->data[i]);
 #endif
-        pio_sm_put_blocking(led_strip->pio, led_strip->sm, led_strip->data[i] << 8u);
+        pio_sm_put_blocking(led_strip->pio, led_strip->sm, led_strip->data[i]);
     }
     return 1;
 }
