@@ -1,3 +1,5 @@
+#include "pico/stdlib.h"
+#include "bsp/board.h"
 #include "WS2812.pio.h"
 #include "ws2812.h"
 
