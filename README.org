@@ -21,7 +21,6 @@ In your sources:
   Most WS2812 strips take GRB values, so use `ws2812_urgb_grbu32()`, for strips that use RGB use `ws2812_urgb_rgbu32()` and for RGBW use `ws2812_urgb_wrgbu32()`
   If you have a very special LED strip that takes a completely different format, you can also build your own uint32_t and pass that into `ws2812_set_LED()`.
 
-
 * Usage
 #+begin_src C :tangle example.c
 #include "WS2812.pio.h"
@@ -69,7 +68,7 @@ cd ws2812_pico_sdk
 
 Update the pico-sdk submodule:
 #+begin_src bash
-git submodule update --init
+git submodule update --init --recursive
 #+end_src
 
 Build:
