@@ -23,7 +23,9 @@ int main(void) {
   while (1) {
     // set first LED to red
     ws2812_set_led(led_strip, 0, ws2812_urgb_grbu32(255, 0, 0));
+    // set second LED to green
     ws2812_set_led(led_strip, 1, ws2812_urgb_grbu32(0, 255, 0));
+    // set third LED to blue
     ws2812_set_led(led_strip, 2, ws2812_urgb_grbu32(0, 0, 255));
     // write the data do the strip
     ws2812_show(led_strip);
