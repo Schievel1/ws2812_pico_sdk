@@ -1,5 +1,4 @@
 #include "pico/stdlib.h"
-/* #include "bsp/board.h" */
 #include "WS2812.pio.h"
 #include "ws2812.h"
 
@@ -11,7 +10,6 @@
 struct WS2812* led_strip;
 
 int main(void) {
-  /* board_init(); */
   stdio_init_all();
 
   // Create a WS2812 object
