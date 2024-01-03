@@ -1,5 +1,5 @@
 #include "pico/stdlib.h"
-#include "bsp/board.h"
+/* #include "bsp/board.h" */
 #include "WS2812.pio.h"
 #include "ws2812.h"
 
@@ -11,7 +11,7 @@
 struct WS2812* led_strip;
 
 int main(void) {
-  board_init();
+  /* board_init(); */
   stdio_init_all();
 
   // Create a WS2812 object
@@ -21,6 +21,8 @@ int main(void) {
   ws2812_fill(led_strip, ws2812_urgb_grbu32(255, 255, 255));
   // write the data do the strip
   ws2812_show(led_strip);
+  // wait a bit so we can see whats going on
+  sleep_ms(2000);
 
   while (1) {
     // set first LED to red
@@ -29,7 +31,25 @@ int main(void) {
     ws2812_set_led(led_strip, 1, ws2812_urgb_grbu32(0, 255, 0));
     // set third LED to blue
     ws2812_set_led(led_strip, 2, ws2812_urgb_grbu32(0, 0, 255));
-    // write the data do the strip
+    // write the data to the strip
+    ws2812_show(led_strip);
+    sleep_ms(1000);
+    // set first LED to green
+    ws2812_set_led(led_strip, 0, ws2812_urgb_grbu32(0, 255, 0));
+    // set second LED to blue
+    ws2812_set_led(led_strip, 1, ws2812_urgb_grbu32(0, 0, 255));
+    // set third LED to red
+    ws2812_set_led(led_strip, 2, ws2812_urgb_grbu32(255, 0, 0));
+    // write the data to the strip
+    ws2812_show(led_strip);
+    sleep_ms(1000);
+    // set first LED to blue
+    ws2812_set_led(led_strip, 0, ws2812_urgb_grbu32(0, 0, 255));
+    // set second LED to red
+    ws2812_set_led(led_strip, 1, ws2812_urgb_grbu32(255, 0, 0));
+    // set third LED to green
+    ws2812_set_led(led_strip, 2, ws2812_urgb_grbu32(0, 255, 0));
+    // write the data to the strip
     ws2812_show(led_strip);
     sleep_ms(1000);
   }

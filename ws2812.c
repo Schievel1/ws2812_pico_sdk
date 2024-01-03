@@ -7,9 +7,11 @@
 
 struct WS2812 {
     PIO pio;
-    int sm;
+    int16_t sm;
+    uint8_t pin;
+    bool is_rgbw;
     uint16_t offset;
-    int length;
+    uint16_t length;
     uint32_t* data;
 };
 
@@ -60,7 +62,7 @@ int8_t ws2812_fill(struct WS2812* led_strip, uint32_t pixel_data) {
         return -1;
     }
     for (uint16_t i = 0; i < led_strip->length; i++)
-        set_led_grb(led_strip, i, pixel_data);
+        ws2812_set_led(led_strip, i, pixel_data);
     return 0;
 }
 
@@ -116,7 +118,7 @@ PIO ws2812_get_pio(struct WS2812* led_strip) {
 #ifdef DEBUG
         printf("ws2812_get_pio: led_strip is NULL\n");
 #endif
-        return -1;
+        return (PIO)-1;
     }
     return led_strip->pio;
 }
@@ -138,15 +140,17 @@ uint32_t ws2812_get_pixel_data(struct WS2812* led_strip, uint16_t idx) {
 }
 
 struct WS2812* ws2812_initialize(PIO pio, uint16_t sm, uint8_t pin, uint16_t length, bool is_rgbw) {
-   struct WS2812* led_strip = malloc(sizeof(ws2812));
+   struct WS2812* led_strip = malloc(sizeof(struct WS2812));
    if (!led_strip)
        return NULL;
    led_strip->pio = pio;
    led_strip->sm = sm;
+   led_strip->pin = pin;
    led_strip->length = length;
+   led_strip->is_rgbw = is_rgbw;
    led_strip->data = malloc(length * sizeof(uint32_t));
    led_strip->offset = pio_add_program(led_strip->pio, &ws2812_program);
-   ws2812_program_init(led_strip->pio, led_strip->sm, led_strip->offset, pin, 800000, is_rgbw? 32 : 24);
+   ws2812_program_init(led_strip->pio, led_strip->sm, led_strip->offset, led_strip->pin, 800000, led_strip->is_rgbw? 32 : 24);
    return led_strip;
 }
 
