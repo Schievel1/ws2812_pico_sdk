@@ -1,21 +1,18 @@
 #+title: Readme
 #+author: Pascal Jaeger
 #+auto_tangle: t
-
-!!! This is wip, but already (kind of) usable.
-
 This is a small WS2812 'object' written in plain C. It controls a WS2812 led strip using the programmable IO feature of the RP2040.
 
 * Quickstart
 - Copy ~ws2812.c~,  ~ws2812.h~ and ~ws2812.pio~ into your project directory
 - Add ~pico_generate_pio_header(YourProject ${CMAKE_CURRENT_LIST_DIR}/WS2812.pio)~ to your ~CMakeLists.txt~
   (Replacing YourProject with the name of your project, duh :D)
-- Add the ~ws2812.c to your add_executable instruction of your CMakeLists.txt
+- Add the ~ws2812.c~ to your add_executable instruction of your CMakeLists.txt
 - Make sure ~hardware_pio~ is included within the ~target_link_libraries~ instruction of your ~CMakeLists.txt~
 
 In your sources:
 - get a ws2812 'Object' using ~ws2812_initialize()~
-  Depending or what LED strip you have (with a value for white or without) you need to pass is_rgbw as true or false.
+  Depending on what LED strip you have (with a value for white or without) you need to pass is_rgbw as true or false.
 - Set LED colors using ~ws2812_set_LED()~ and ~ws2812_fill()~
   These functions take a uint32_t to set the color. Use the provided functions (e.g. ~ws2812_urgb_grbu32()~) to pack RGB (0-255) values into such an uint32_t.
   Most WS2812 strips take GRB values, so use ~ws2812_urgb_grbu32()~, for strips that use RGB use ~ws2812_urgb_rgbu32()~ and for RGBW use ~ws2812_urgb_wrgbu32()~.
