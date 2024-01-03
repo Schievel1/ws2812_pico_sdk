@@ -1,5 +1,5 @@
 #include "pico/stdlib.h"
-#include "WS2812.pio.h"
+#include "WS2812.pio.h" // be aware that his header must be included *before* ws2812.h
 #include "ws2812.h"
 
 #define LED_PIN 2
